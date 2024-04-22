@@ -15,8 +15,6 @@ game_engine_osx
 osx_build_derived_data
 **.DS_Store
 **.dSYM
-**.png
-**.PNG
 **.jpeg
 **.JPEG
 **.jpg

@@ -34,5 +34,7 @@
 
 - [ ] Swap out Rendering Backend
 - [ ] Add Functional Editor
+- [ ] Add Particle System
+- [ ] Create CI/CD Pipeline
 
 #### v1.1

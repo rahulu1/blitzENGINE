@@ -1,5 +1,5 @@
 # blitzENGINE
-![blitzENGINE Logo](repo_assets/images/blitzEN-filled.png)
+![blitzENGINE Logo](/repo_assets/images/blitzEN-filled.png)
 
 ## Roadmap
 

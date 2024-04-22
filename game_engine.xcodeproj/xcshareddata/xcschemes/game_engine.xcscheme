@@ -37,7 +37,7 @@
       disableMainThreadChecker = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/rahul/Documents/School/Winter 24/EECS 498.007/game_engine_rahulu"
+      customWorkingDirectory = "/Users/rahul/Documents/blitzENGINE"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"

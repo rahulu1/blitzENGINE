@@ -7,6 +7,8 @@
 
 #### v0.7 Pre-Alpha \[We are here]
 
+- [ ] Add Proper Deinitialization for Manager classes, SDL, and Lua
+- [ ] Find and remove any arbitrary decisions stemming from spec
 - [ ] Configure CMake build system for project
 - [ ] Reorganize all libraries (primarily SDL to a more consistent structure)
 - [ ] Update All Dependencies

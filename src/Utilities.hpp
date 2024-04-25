@@ -15,7 +15,6 @@
 
 #include "document.h"
 #include "filereadstream.h"
-#include "glm.hpp"
 #include "lua.hpp"
 #include "sol/sol.hpp"
 

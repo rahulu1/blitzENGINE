@@ -114,11 +114,6 @@ void ComponentManager::Init()
     "SetSnapping", sol::c_call<decltype(&ITween::cppTweenSetSnapping), &ITween::cppTweenSetSnapping>);
     
     
-    L.new_usertype<glm::vec2>("vec2",
-    "x", &glm::vec2::x,
-    "y", &glm::vec2::y);
-    
-    
     L.new_usertype<b2Vec2>("Vector2",
     sol::call_constructor, sol::factories(
     []() { return b2Vec2(); },

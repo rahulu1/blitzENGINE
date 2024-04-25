@@ -127,7 +127,7 @@
 		B717E2882B98FF34006BD0EB /* ComponentManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentManager.cpp; sourceTree = "<group>"; };
 		B717E2892B98FF34006BD0EB /* ComponentManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentManager.hpp; sourceTree = "<group>"; };
 		B717E28C2B9912CB006BD0EB /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
-		B7499D1B2B7D598100D7BBF1 /* game_engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = game_engine; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7499D1B2B7D598100D7BBF1 /* blitzENGINE */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blitzENGINE; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7831CE22BCC84A600943306 /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
 		B7831CEA2BCC855000943306 /* Time_macos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Time_macos.cpp; sourceTree = "<group>"; };
 		B7831CF02BCFA0DE00943306 /* Template.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Template.hpp; sourceTree = "<group>"; };
@@ -823,7 +823,7 @@
 		B7499D1C2B7D598100D7BBF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7499D1B2B7D598100D7BBF1 /* game_engine */,
+				B7499D1B2B7D598100D7BBF1 /* blitzENGINE */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1674,9 +1674,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7499D1A2B7D598100D7BBF1 /* game_engine */ = {
+		B7499D1A2B7D598100D7BBF1 /* blitzENGINE */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7499D222B7D598100D7BBF1 /* Build configuration list for PBXNativeTarget "game_engine" */;
+			buildConfigurationList = B7499D222B7D598100D7BBF1 /* Build configuration list for PBXNativeTarget "blitzENGINE" */;
 			buildPhases = (
 				B7499D172B7D598100D7BBF1 /* Sources */,
 				B7499D182B7D598100D7BBF1 /* Frameworks */,
@@ -1686,9 +1686,9 @@
 			);
 			dependencies = (
 			);
-			name = game_engine;
+			name = blitzENGINE;
 			productName = game_engine;
-			productReference = B7499D1B2B7D598100D7BBF1 /* game_engine */;
+			productReference = B7499D1B2B7D598100D7BBF1 /* blitzENGINE */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -1718,7 +1718,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7499D1A2B7D598100D7BBF1 /* game_engine */,
+				B7499D1A2B7D598100D7BBF1 /* blitzENGINE */,
 			);
 		};
 /* End PBXProject section */
@@ -2032,7 +2032,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7499D222B7D598100D7BBF1 /* Build configuration list for PBXNativeTarget "game_engine" */ = {
+		B7499D222B7D598100D7BBF1 /* Build configuration list for PBXNativeTarget "blitzENGINE" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7499D232B7D598100D7BBF1 /* Debug */,

@@ -13,6 +13,7 @@
 #define DEBUG_MODE false
 
 #include "Actor.hpp"
+#include "glm.hpp"
 #include "Image.hpp"
 #include "SDL2/SDL.h"
 #include "SDL2_ttf/SDL_ttf.h"
@@ -20,7 +21,6 @@
 #include <stdio.h>
 #include <string>
 #include <unordered_map>
-#include <glm.hpp>
 
 struct TextDrawRequest
 {

@@ -13,8 +13,10 @@
 #include <vector>
 
 #define GLM_ENABLE_EXPERIMENTAL
+
 #include "Actor.hpp"
 #include "EventBus.hpp"
+#include "glm.hpp"
 #include "ImageManager.hpp"
 #include "Input.hpp"
 #include "Renderer.hpp"

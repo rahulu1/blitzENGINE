@@ -18,6 +18,7 @@ public:
     
     /**
      * Creates and initializes a new Scene object from a .scene file with the provided scene name.
+     *
      * @params scene_to_set The name of the .scene file to load the Scene from.
      */
     static void SetCurrentScene(const std::string &scene_to_set);

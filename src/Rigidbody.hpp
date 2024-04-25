@@ -9,6 +9,7 @@
 #define Rigidbody_hpp
 
 #include "CollisionManager.hpp"
+#include "glm.hpp"
 #include "NativeComponent.hpp"
 #include "TweenManager.hpp"
 #include "sol/sol.hpp"

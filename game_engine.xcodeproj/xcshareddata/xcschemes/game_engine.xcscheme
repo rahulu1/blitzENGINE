@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B7499D1A2B7D598100D7BBF1"
-               BuildableName = "game_engine"
-               BlueprintName = "game_engine"
+               BuildableName = "blitzENGINE"
+               BlueprintName = "blitzENGINE"
                ReferencedContainer = "container:game_engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7499D1A2B7D598100D7BBF1"
-            BuildableName = "game_engine"
-            BlueprintName = "game_engine"
+            BuildableName = "blitzENGINE"
+            BlueprintName = "blitzENGINE"
             ReferencedContainer = "container:game_engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7499D1A2B7D598100D7BBF1"
-            BuildableName = "game_engine"
-            BlueprintName = "game_engine"
+            BuildableName = "blitzENGINE"
+            BlueprintName = "blitzENGINE"
             ReferencedContainer = "container:game_engine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

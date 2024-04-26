@@ -17,10 +17,10 @@ Tween<T>::Tween(std::function<T()> getter, std::function<void(T)> setter, T star
     setter(setter),
     start_val(start),
     end_val(end)
-    {
-        this->duration = duration;
-        evaluated_duration = duration * timescale;
-    }
+{
+    this->duration = duration;
+    evaluated_duration = duration * timescale;
+}
 
 
 template <typename T>
@@ -44,13 +44,13 @@ void Tween<b2Vec2>::EvaluateAndApply(float dt)
     if (tween_multiplier == -1.0f)
     {
         setter(end_val);
-        
+
         if (on_kill)
             on_kill();
 
         return;
     }
-    
+
     b2Vec2 current_val = start_val.operator_add(end_val.operator_sub(start_val).operator_mul(tween_multiplier));
 
     current_val = snapping ? b2Vec2(std::round(current_val.x), std::round(current_val.y)) : current_val;
@@ -68,7 +68,7 @@ void Tween<b2Vec2>::EvaluateAndApply(float dt)
     default:    
         break;
     }
-        
+
     setter(current_val);
 }
 
@@ -81,7 +81,7 @@ void Tween<T>::EvaluateAndApply(float dt)
     if (tween_multiplier == -1.0f)
     {
         setter(end_val);
-        
+
         if (on_kill)
             on_kill();
         

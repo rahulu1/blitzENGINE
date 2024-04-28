@@ -32,7 +32,7 @@ void Animation::UpdateAnimationWithJSON(const rapidjson::Value &animation_json)
         {
             uint16_t keyframe_number = keyframe_json["frame_index"].GetInt();
             
-            if (keyframe_number > total_frames)
+            if ((keyframe_number + 1) > total_frames)
             {
                 total_frames = keyframe_number + 1;
                 frame_names.resize(static_cast<size_t>(total_frames));

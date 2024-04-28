@@ -182,7 +182,7 @@ inline float Animator::GetCurrentFrameIndex() const
 // TODO: Replace with appropriate function after integrating SpriteRenderer
 inline std::string Animator::GetCurrentFrameName() const
 {
-    std::string current_frame_name = current_animation->GetImageNameAtSpecifiedFrame(current_frame_index);
+    std::string current_frame_name = !current_animation_name.empty() ? current_animation->GetImageNameAtSpecifiedFrame(current_frame_index) : "";
     return current_frame_name;
 }
 

@@ -24,7 +24,7 @@
 
 struct TextDrawRequest
 {
-    Image* image;
+    std::shared_ptr<Image> image;
     
     const int x;
     const int y;
@@ -41,10 +41,10 @@ struct ImageDrawRequest
     float pivot_x = 0.5f;
     float pivot_y = 0.5f;
     
-    Image* image;
+    std::shared_ptr<Image> image;
     
-    float rotation_degrees = 0;
-    int sorting_order = 0;
+    double rotation_degrees = 0;
+    uint16_t sorting_order = 0;
     
     Uint8 r = 255;
     Uint8 g = 255;
@@ -58,7 +58,7 @@ struct ImageDrawRequest
 
 struct PixelDrawRequest
 {
-    int order;
+    uint32_t order;
     
     int x = 0;
     int y = 0;
@@ -97,13 +97,13 @@ public:
     static void SetGameTitle(const std::string &new_game_title);
     
 
-    static void SetClearColorR(int new_clear_color_r);
+    static void SetClearColorR(Uint8 new_clear_color_r);
     
     
-    static void SetClearColorG(int new_clear_color_g);
+    static void SetClearColorG(Uint8 new_clear_color_g);
     
     
-    static void SetClearColorB(int new_clear_color_b);
+    static void SetClearColorB(Uint8 new_clear_color_b);
     
     
     static void SetCameraDimensionsX(int new_resolution_x);
@@ -206,13 +206,13 @@ inline void Renderer::SetCameraDimensionsX(int new_resolution_x)        { camera
 inline void Renderer::SetCameraDimensionsY(int new_resolution_y)        { camera_dimensions.y = new_resolution_y; }
 
 
-inline void Renderer::SetClearColorR(int new_clear_color_r)             { clear_color_r = new_clear_color_r; }
+inline void Renderer::SetClearColorR(Uint8 new_clear_color_r)             { clear_color_r = new_clear_color_r; }
 
 
-inline void Renderer::SetClearColorG(int new_clear_color_g)             { clear_color_g = new_clear_color_g; }
+inline void Renderer::SetClearColorG(Uint8 new_clear_color_g)             { clear_color_g = new_clear_color_g; }
 
 
-inline void Renderer::SetClearColorB(int new_clear_color_b)             { clear_color_b = new_clear_color_b; }
+inline void Renderer::SetClearColorB(Uint8 new_clear_color_b)             { clear_color_b = new_clear_color_b; }
 
 
 inline void Renderer::cppCameraSetZoom(float new_zoom_factor)           { zoom_factor = new_zoom_factor; }

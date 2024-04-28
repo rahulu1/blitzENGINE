@@ -6,6 +6,7 @@
 #include "Image.hpp"
 #include "Utilities.hpp"
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -17,10 +18,10 @@ public:
     static void Init();
     
     
-    static Image* GetImage(const std::string &image_name);
+    static std::shared_ptr<Image> GetImage(const std::string &image_name);
     
     
-    static Image* AddImage(const std::string &image_name, SDL_Texture *texture);
+    static std::shared_ptr<Image> AddImage(const std::string &image_name, SDL_Texture *texture);
     
     
     static bool CheckImage(const std::string &image_name);
@@ -34,7 +35,7 @@ public:
     static void cppImageDraw(const std::string &image_name, float _x, float _y);
     
     
-    static void cppImageDrawEx(const std::string &image_name, float _x, float _y, float _rotation_degrees, float _scale_x, float _scale_y, float _pivot_x, float _pivot_y, float _r, float _g, float _b, float _a, float _sorting_order);
+    static void cppImageDrawEx(const std::string &image_name, float _x, float _y, double _rotation_degrees, float _scale_x, float _scale_y, float _pivot_x, float _pivot_y, float _r, float _g, float _b, float _a, float _sorting_order);
     
     
     static void cppImageDrawUI(const std::string &image_name, float _x, float _y);
@@ -45,11 +46,7 @@ public:
 private:
     
     
-    static inline std::unordered_map<std::string, Image> image_cache;
-    
-    
-    static inline int image_draw_requests = 0;
-    
+    static inline std::unordered_map<std::string, std::shared_ptr<Image>> image_cache;
 };
 
 
@@ -64,15 +61,22 @@ inline void ImageManager::Init()
 }
 
 
-inline Image* ImageManager::AddImage(const std::string &image_name, SDL_Texture *texture)
+inline std::shared_ptr<Image> ImageManager::AddImage(const std::string &image_name, SDL_Texture *texture)
 {
     if (image_cache.count(image_name) > 0)
-        return &image_cache[image_name];
+        return image_cache[image_name];
     
-    image_cache[image_name] = Image{texture};
-    SDL_QueryTexture(image_cache[image_name].texture, NULL, NULL, &image_cache[image_name].width, &image_cache[image_name].height);
+    image_cache[image_name] = std::make_shared<Image>(texture, 0, 0);
     
-    return &image_cache[image_name];
+    int get_width;
+    int get_height;
+    
+    SDL_QueryTexture(image_cache[image_name]->texture, NULL, NULL, &get_width, &get_height);
+    
+    image_cache[image_name]->width = static_cast<uint16_t>(get_width);
+    image_cache[image_name]->height = static_cast<uint16_t>(get_height);
+    
+    return image_cache[image_name];
 }
 
 

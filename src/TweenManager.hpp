@@ -18,7 +18,7 @@ class TweenManager
 public:
     
     template <typename T>
-    static ITween* GOTo(std::function<T()> getter, std::function<void(T)> setter, T start, T end, float duration);
+    static std::shared_ptr<Tween<T>> GOTo(std::function<T()> getter, std::function<void(T)> setter, T start, T end, float duration);
 
     
     static void Update();

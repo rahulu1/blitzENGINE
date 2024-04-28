@@ -14,6 +14,7 @@
 #include "document.h"
 #include "Utilities.hpp"
 
+#include <cstdint>
 #include <filesystem>
 #include <iostream>
 #include <list>
@@ -58,10 +59,10 @@ public:
     std::shared_ptr<Actor> DontDestroy(Actor* actor);
     
     
-    std::map<std::string, std::set<int>> uuids_by_name;
+    std::map<std::string, std::set<uint32_t>> uuids_by_name;
 
     
-    std::map<int, std::shared_ptr<Actor>> actors_by_uuid;
+    std::map<uint32_t, std::shared_ptr<Actor>> actors_by_uuid;
     
     
     std::set<std::shared_ptr<Actor>, Actor::less> actors_destroying_components;
@@ -80,7 +81,7 @@ private:
     void DestroyActor(Actor *actor);
     
     
-    void BatchEraseDeadActorsFromMap(std::map<int, std::weak_ptr<Actor>> &flat_map_to_clean);
+    void BatchEraseDeadActorsFromMap(std::map<uint32_t, std::weak_ptr<Actor>> &flat_map_to_clean);
     
     
     void AddNewActors();
@@ -89,16 +90,16 @@ private:
     void AddActorToSceneLifecycleMaps(const std::shared_ptr<Actor> &actor);
     
     
-    std::map<int, std::weak_ptr<Actor>> starting_actors;
+    std::map<uint32_t, std::weak_ptr<Actor>> starting_actors;
     
     
-    std::map<int, std::weak_ptr<Actor>> updating_actors;
+    std::map<uint32_t, std::weak_ptr<Actor>> updating_actors;
     
     
-    std::map<int, std::weak_ptr<Actor>> late_updating_actors;
+    std::map<uint32_t, std::weak_ptr<Actor>> late_updating_actors;
     
     
-    std::map<int, std::weak_ptr<Actor>> fixed_updating_actors;
+    std::map<uint32_t, std::weak_ptr<Actor>> fixed_updating_actors;
     
     
     std::string scene_path;

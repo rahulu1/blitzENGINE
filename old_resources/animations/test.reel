@@ -1,0 +1,22 @@
+{
+    "total_frames": 480,
+    "fps": 120,
+    "keyframes": [
+        {
+            "frame_index": 119,
+            "image_name": "box1"
+        },
+        {
+            "frame_index": 239,
+            "image_name": "box2"
+        },
+        {
+            "frame_index": 359,
+            "image_name": "box3"
+        },
+        {
+            "frame_index": 479,
+            "image_name": "box4"
+        }
+    ]
+}

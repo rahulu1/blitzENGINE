@@ -21,7 +21,7 @@ const bool PixelDrawRequestComp(const PixelDrawRequest &lhs, const PixelDrawRequ
     return lhs.order < rhs.order; // Ensure drawing order for same location
 }
 
-static inline int pixels_requested = 0;
+static inline uint32_t pixels_requested = 0;
 
 void Renderer::Init()
 {

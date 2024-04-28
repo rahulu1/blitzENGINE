@@ -52,7 +52,7 @@ void TextManager::cppTextDraw(const std::string &str_content, float _x, float _y
     
     std::string texture_key = CreateTextureKey(font_ptr, str_content, r, g, b, a);
     
-    Image* text_image;
+    std::shared_ptr<Image> text_image;
     
     if (ImageManager::CheckImage(texture_key))
         text_image = ImageManager::GetImage(texture_key);

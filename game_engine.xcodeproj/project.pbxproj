@@ -13,6 +13,9 @@
 		B784F7C42BD5D54D0053C36C /* Tween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B784F7C22BD5D54D0053C36C /* Tween.cpp */; };
 		B784F7CA2BD5DFB60053C36C /* Timer_macos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B784F7C82BD5DFB60053C36C /* Timer_macos.cpp */; };
 		B784F7CD2BD5FE7B0053C36C /* EaseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B784F7CB2BD5FE7B0053C36C /* EaseManager.cpp */; };
+		B7AD1BF72BDD74140047D8A4 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7AD1BF52BDD74140047D8A4 /* Animator.cpp */; };
+		B7AD1BFA2BDD74250047D8A4 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7AD1BF82BDD74250047D8A4 /* Animation.cpp */; };
+		B7AD1BFD2BDD7F500047D8A4 /* AnimationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7AD1BFB2BDD7F500047D8A4 /* AnimationManager.cpp */; };
 		B7AEB6E42B7EB5980081CBC0 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7AEB6E22B7EB5980081CBC0 /* Input.cpp */; };
 		B7B4DE152B7D981C0088FF76 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B4DE112B7D981C0088FF76 /* SDL2_image.framework */; };
 		B7B4DE172B7D981C0088FF76 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B4DE122B7D981C0088FF76 /* SDL2_mixer.framework */; };
@@ -139,6 +142,12 @@
 		B784F7C82BD5DFB60053C36C /* Timer_macos.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer_macos.cpp; sourceTree = "<group>"; };
 		B784F7CB2BD5FE7B0053C36C /* EaseManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EaseManager.cpp; sourceTree = "<group>"; };
 		B784F7CC2BD5FE7B0053C36C /* EaseManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EaseManager.hpp; sourceTree = "<group>"; };
+		B7AD1BF52BDD74140047D8A4 /* Animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Animator.cpp; sourceTree = "<group>"; };
+		B7AD1BF62BDD74140047D8A4 /* Animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Animator.hpp; sourceTree = "<group>"; };
+		B7AD1BF82BDD74250047D8A4 /* Animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
+		B7AD1BF92BDD74250047D8A4 /* Animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
+		B7AD1BFB2BDD7F500047D8A4 /* AnimationManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationManager.cpp; sourceTree = "<group>"; };
+		B7AD1BFC2BDD7F500047D8A4 /* AnimationManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationManager.hpp; sourceTree = "<group>"; };
 		B7AEB6E22B7EB5980081CBC0 /* Input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		B7AEB6E32B7EB5980081CBC0 /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		B7B4DE112B7D981C0088FF76 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -1622,6 +1631,9 @@
 			isa = PBXGroup;
 			children = (
 				B7DFB2CE2B7D66CF00AC3A69 /* Actor.cpp */,
+				B7AD1BF82BDD74250047D8A4 /* Animation.cpp */,
+				B7AD1BFB2BDD7F500047D8A4 /* AnimationManager.cpp */,
+				B7AD1BF52BDD74140047D8A4 /* Animator.cpp */,
 				B7DFB2DC2B7D66CF00AC3A69 /* AudioManager.cpp */,
 				B7C2A51B2BB8E8A900AB3B2C /* CollisionManager.cpp */,
 				B717E2882B98FF34006BD0EB /* ComponentManager.cpp */,
@@ -1644,6 +1656,9 @@
 				B7DFB2C92B7D66CF00AC3A69 /* Engine.h */,
 				B7DFB2D72B7D66CF00AC3A69 /* resource.h */,
 				B7DFB2D42B7D66CF00AC3A69 /* Actor.hpp */,
+				B7AD1BF92BDD74250047D8A4 /* Animation.hpp */,
+				B7AD1BFC2BDD7F500047D8A4 /* AnimationManager.hpp */,
+				B7AD1BF62BDD74140047D8A4 /* Animator.hpp */,
 				B7DFB2CB2B7D66CF00AC3A69 /* AudioManager.hpp */,
 				B7C2A51C2BB8E8A900AB3B2C /* CollisionManager.hpp */,
 				B717E28C2B9912CB006BD0EB /* Component.hpp */,
@@ -1762,6 +1777,7 @@
 				B7C4BEAF2BAB722100D4537D /* b2_collide_circle.cpp in Sources */,
 				B7DFB2F02B7D66CF00AC3A69 /* main.cpp in Sources */,
 				B7C4BEB22BAB722100D4537D /* b2_collision.cpp in Sources */,
+				B7AD1BFA2BDD74250047D8A4 /* Animation.cpp in Sources */,
 				B7C2A5732BBB1EE200AB3B2C /* lmem.c in Sources */,
 				B7831CEB2BCC855000943306 /* Time_macos.cpp in Sources */,
 				B7C2A5692BBB1EE200AB3B2C /* ldblib.c in Sources */,
@@ -1772,6 +1788,7 @@
 				B7C2A5822BBB1EE200AB3B2C /* lzio.c in Sources */,
 				B7C4BECD2BAB722100D4537D /* b2_motor_joint.cpp in Sources */,
 				B7DFB2EC2B7D66CF00AC3A69 /* SceneManager.cpp in Sources */,
+				B7AD1BFD2BDD7F500047D8A4 /* AnimationManager.cpp in Sources */,
 				B7C4BEB12BAB722100D4537D /* b2_collide_polygon.cpp in Sources */,
 				B7DFB2EF2B7D66CF00AC3A69 /* AudioManager.cpp in Sources */,
 				B7C4BEAD2BAB722100D4537D /* b2_chain_shape.cpp in Sources */,
@@ -1818,6 +1835,7 @@
 				B7C4BEC92BAB722100D4537D /* b2_friction_joint.cpp in Sources */,
 				B7C2A56C2BBB1EE200AB3B2C /* ldump.c in Sources */,
 				B7C2A5772BBB1EE200AB3B2C /* loslib.c in Sources */,
+				B7AD1BF72BDD74140047D8A4 /* Animator.cpp in Sources */,
 				B7C2A5652BBB1EE200AB3B2C /* lbaselib.c in Sources */,
 				B7C2A56D2BBB1EE200AB3B2C /* lfunc.c in Sources */,
 				B7C2A5782BBB1EE200AB3B2C /* lparser.c in Sources */,

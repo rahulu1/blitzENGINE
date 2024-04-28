@@ -19,7 +19,7 @@ Tween<T>::Tween(std::function<T()> getter, std::function<void(T)> setter, T star
     end_val(end)
 {
     this->duration = duration;
-    evaluated_duration = duration * timescale;
+    evaluated_duration = duration / timescale;
 }
 
 
@@ -147,28 +147,37 @@ bool ITween::IsPlaying()
 }
 
 
-ITween* ITween::cppTweenPlay()
+ITween* ITween::Play()
 {
     playing = true;
     return this;
 }
 
 
-ITween* ITween::cppTweenPause()
+ITween* ITween::Pause()
 {
     playing = false;
     return this;
 }
 
 
-ITween* ITween::cppTweenRewind()
+ITween* ITween::Rewind()
 {
     elapsed_time = 0.0f;
     return this;
 }
 
 
-ITween* ITween::cppTweenKill()
+ITween* ITween::Stop()
+{
+    loops = 0;
+    on_kill = NULL;
+    
+    return this;
+}
+
+
+ITween* ITween::Kill()
 {
     loops = 0;
     
@@ -176,7 +185,7 @@ ITween* ITween::cppTweenKill()
 }
 
 
-ITween* ITween::cppTweenOnKill(sol::protected_function kill_func, sol::optional<sol::table> kill_table)
+ITween* ITween::OnKill(sol::protected_function kill_func, sol::optional<sol::table> kill_table)
 {
     if (kill_table.has_value())
         on_kill = [kill_func, kill_table]() { kill_func(kill_table.value()); };
@@ -187,22 +196,28 @@ ITween* ITween::cppTweenOnKill(sol::protected_function kill_func, sol::optional<
 }
 
 
-ITween* ITween::cppTweenSetOvershootOrAmplitude(float overshootOrAmplitude)
+ITween* ITween::SetOvershootOrAmplitude(float overshootOrAmplitude)
 {
     this->overshootOrAmplitude = overshootOrAmplitude;
     return this;
 }
 
 
-ITween* ITween::cppTweenSetTimescale(float timescale)
+ITween* ITween::SetTimescale(float timescale)
 {
     this->timescale = timescale;
-    evaluated_duration = duration * timescale;
+    evaluated_duration = duration / timescale;
     return this;
 }
 
 
-ITween* ITween::cppTweenSetLoops(int loops, LoopType loop_type)
+float ITween::GetTimescale() const
+{
+    return timescale;
+}
+
+
+ITween* ITween::SetLoops(int32_t loops, LoopType loop_type)
 {
     this->loops = loops;
     this->loop_type = loop_type;
@@ -210,14 +225,14 @@ ITween* ITween::cppTweenSetLoops(int loops, LoopType loop_type)
 }
 
 
-ITween* ITween::cppTweenSetEase(EaseType ease_type)
+ITween* ITween::SetEase(EaseType ease_type)
 {
     this->ease_type = ease_type;
     return this;
 }
 
 
-ITween* ITween::cppTweenSetUpdate(UpdateType update_type)
+ITween* ITween::SetUpdate(UpdateType update_type)
 {
     if (this->update_type != update_type)
     {
@@ -258,17 +273,31 @@ ITween* ITween::cppTweenSetUpdate(UpdateType update_type)
 }
 
 
-ITween* ITween::cppTweenSetAxisConstraint(AxisConstraint axis_constraint)
+ITween* ITween::SetAxisConstraint(AxisConstraint axis_constraint)
 {
     this->axis_constraint = axis_constraint;
     return this;
 }
 
 
-ITween* ITween::cppTweenSetSnapping(bool snapping)
+ITween* ITween::SetSnapping(bool snapping)
 {
     this->snapping = snapping;
     return this;
+}
+
+
+ITween* ITween::SetProgress(float progress)
+{
+    elapsed_time = progress / timescale;
+    return this;
+}
+
+
+float ITween::GetProgress() const
+{
+    float progress = elapsed_time / evaluated_duration;
+    return progress;
 }
 
 

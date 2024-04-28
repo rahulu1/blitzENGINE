@@ -10,6 +10,7 @@
 #include "ComponentManager.hpp"
 
 #include "AudioManager.hpp"
+#include "Animator.hpp"
 #include "Engine.h"
 #include "EventBus.hpp"
 #include "Input.hpp"
@@ -25,7 +26,8 @@ namespace fs =  std::filesystem;
 
 
 std::unordered_map<std::string, std::function<std::shared_ptr<Component>()>> __native_component_factory = {
-    {"Rigidbody", []() -> std::shared_ptr<Component> { return std::make_shared<Rigidbody>(); }}
+    {"Rigidbody", []() -> std::shared_ptr<Component> { return std::make_shared<Rigidbody>(); }},
+    {"Animator", []() -> std::shared_ptr<Component> { return std::make_shared<Animator>(); }}
 };
 
 
@@ -33,6 +35,9 @@ void ComponentManager::Init()
 {
     L = sol::state();
     L.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string);
+    
+    
+    /* Usertype Bindings */
     
     L.new_usertype<Actor>("Actor",
     "GetName", sol::c_call<decltype(&Actor::cppActorGetName), &Actor::cppActorGetName>,
@@ -44,6 +49,23 @@ void ComponentManager::Init()
     "RemoveComponent", sol::c_call<decltype(&Actor::cppActorRemoveComponent), &Actor::cppActorRemoveComponent>);
     
     
+    L.new_usertype<Animator>("Animator",
+    sol::base_classes, sol::bases<Component, NativeComponent>(),
+    "key", sol::c_call<decltype(&Component::GetComponentKey), &Component::GetComponentKey>,
+    "actor", sol::property(&NativeComponent::GetActor),
+    "Play", sol::c_call<decltype(&Animator::cppAnimatorPlay), &Animator::cppAnimatorPlay>,
+    "Pause", sol::c_call<decltype(&Animator::cppAnimatorPause), &Animator::cppAnimatorPause>,
+    "Rewind", sol::c_call<decltype(&Animator::cppAnimatorRewind), &Animator::cppAnimatorRewind>,
+    "Kill", sol::c_call<decltype(&Animator::cppAnimatorKill), &Animator::cppAnimatorKill>,
+    "IsPlaying", sol::c_call<decltype(&Animator::cppAnimatorIsPlaying), &Animator::cppAnimatorIsPlaying>,
+    "GetCurrentFrameName", sol::c_call<decltype(&Animator::GetCurrentFrameName), &Animator::GetCurrentFrameName>,
+    "SetAnimation", sol::c_call<decltype(&Animator::SetAnimation), &Animator::SetAnimation>,
+    "GetAnimation", sol::c_call<decltype(&Animator::cppAnimatorGetAnimation), &Animator::cppAnimatorGetAnimation>,
+    "SetTimescale", sol::c_call<decltype(&Animator::cppAnimatorSetTimescale), &Animator::cppAnimatorSetTimescale>,
+    "GetTimescale", sol::c_call<decltype(&Animator::cppAnimatorGetTimescale), &Animator::cppAnimatorGetTimescale>,
+    "OnKill", sol::c_call<decltype(&Animator::cppAnimatorOnKill), &Animator::cppAnimatorOnKill>);
+    
+    
     L.new_usertype<CollisionData>("collision",
     "other", &CollisionData::other,
     "point", &CollisionData::point,
@@ -52,7 +74,6 @@ void ComponentManager::Init()
     
     
     L.new_usertype<Component>("Component",
-    sol::base_classes, sol::bases<std::enable_shared_from_this<Component>>(),
     "key", sol::c_call<decltype(&Component::GetComponentKey), &Component::GetComponentKey>);
     
     
@@ -64,12 +85,15 @@ void ComponentManager::Init()
     
     
     L.new_usertype<NativeComponent>("NativeComponent",
-    sol::base_classes, sol::bases<std::enable_shared_from_this<Component>, Component>(),
+    sol::base_classes, sol::bases<Component>(),
+    "key", sol::c_call<decltype(&Component::GetComponentKey), &Component::GetComponentKey>,
     "actor", sol::property(&NativeComponent::GetActor));
 
     
     L.new_usertype<Rigidbody>("Rigidbody",
-    sol::base_classes, sol::bases<std::enable_shared_from_this<Component>, Component, NativeComponent>(),
+    sol::base_classes, sol::bases<Component, NativeComponent>(),
+    "key", sol::c_call<decltype(&Component::GetComponentKey), &Component::GetComponentKey>,
+    "actor", sol::property(&NativeComponent::GetActor),
     "x", sol::property(&Rigidbody::GetPositionX, &Rigidbody::SetPositionX),
     "y", sol::property(&Rigidbody::GetPositionY, &Rigidbody::SetPositionY),
     "body_type", sol::property(&Rigidbody::GetBodyType, &Rigidbody::SetBodyType),
@@ -99,19 +123,20 @@ void ComponentManager::Init()
     
     
     L.new_usertype<ITween>("Tween",
-    "Play", sol::c_call<decltype(&ITween::cppTweenPlay), &ITween::cppTweenPlay>,
-    "Pause", sol::c_call<decltype(&ITween::cppTweenPause), &ITween::cppTweenPause>,
-    "Rewind", sol::c_call<decltype(&ITween::cppTweenRewind), &ITween::cppTweenRewind>,
-    "Kill", sol::c_call<decltype(&ITween::cppTweenKill), &ITween::cppTweenKill>,
-    "OnKill", sol::c_call<decltype(&ITween::cppTweenOnKill), &ITween::cppTweenOnKill>,
-    "SetOvershoot", sol::c_call<decltype(&ITween::cppTweenSetOvershootOrAmplitude), &ITween::cppTweenSetOvershootOrAmplitude>,
-    "SetAmplitude", sol::c_call<decltype(&ITween::cppTweenSetOvershootOrAmplitude), &ITween::cppTweenSetOvershootOrAmplitude>,
-    "SetTimescale", sol::c_call<decltype(&ITween::cppTweenSetTimescale), &ITween::cppTweenSetTimescale>,
-    "SetLoops", sol::c_call<decltype(&ITween::cppTweenSetLoops), &ITween::cppTweenSetLoops>,
-    "SetEase", sol::c_call<decltype(&ITween::cppTweenSetEase), &ITween::cppTweenSetEase>,
-    "SetUpdate", sol::c_call<decltype(&ITween::cppTweenSetUpdate), &ITween::cppTweenSetUpdate>,
-    "SetAxisConstraint", sol::c_call<decltype(&ITween::cppTweenSetAxisConstraint), &ITween::cppTweenSetAxisConstraint>,
-    "SetSnapping", sol::c_call<decltype(&ITween::cppTweenSetSnapping), &ITween::cppTweenSetSnapping>);
+    "Play", sol::c_call<decltype(&ITween::Play), &ITween::Play>,
+    "Pause", sol::c_call<decltype(&ITween::Pause), &ITween::Pause>,
+    "Rewind", sol::c_call<decltype(&ITween::Rewind), &ITween::Rewind>,
+    "Kill", sol::c_call<decltype(&ITween::Kill), &ITween::Kill>,
+    "OnKill", sol::c_call<decltype(&ITween::OnKill), &ITween::OnKill>,
+    "SetOvershoot", sol::c_call<decltype(&ITween::SetOvershootOrAmplitude), &ITween::SetOvershootOrAmplitude>,
+    "SetAmplitude", sol::c_call<decltype(&ITween::SetOvershootOrAmplitude), &ITween::SetOvershootOrAmplitude>,
+    "SetTimescale", sol::c_call<decltype(&ITween::SetTimescale), &ITween::SetTimescale>,
+    "GetTimescale", sol::c_call<decltype(&ITween::GetTimescale), &ITween::GetTimescale>,
+    "SetLoops", sol::c_call<decltype(&ITween::SetLoops), &ITween::SetLoops>,
+    "SetEase", sol::c_call<decltype(&ITween::SetEase), &ITween::SetEase>,
+    "SetUpdate", sol::c_call<decltype(&ITween::SetUpdate), &ITween::SetUpdate>,
+    "SetAxisConstraint", sol::c_call<decltype(&ITween::SetAxisConstraint), &ITween::SetAxisConstraint>,
+    "SetSnapping", sol::c_call<decltype(&ITween::SetSnapping), &ITween::SetSnapping>);
     
     
     L.new_usertype<b2Vec2>("Vector2",
@@ -128,6 +153,8 @@ void ComponentManager::Init()
     "Distance", sol::c_call<decltype(b2Distance), b2Distance>,
     "Dot", static_cast<float (*)(const b2Vec2&, const b2Vec2&)>(&b2Dot));
     
+    
+    /* Namespace Bindings */
     
     L["Actor"] = L.create_table_with(
     "Find", sol::c_call<decltype(SceneManager::cppActorFind), SceneManager::cppActorFind>,
@@ -261,7 +288,10 @@ void ComponentManager::Init()
 }
 
 
-std::shared_ptr<Component> ComponentManager::MakeComponent(const std::shared_ptr<Component> &other_component) { return other_component->Clone(); }
+std::shared_ptr<Component> ComponentManager::MakeComponent(const std::shared_ptr<Component> &other_component)
+{
+    return other_component->Clone();
+}
 
 
 std::shared_ptr<Component> ComponentManager::MakeComponent(const std::string &component_type)
@@ -316,16 +346,6 @@ ITween* ComponentManager::cppGOTweenTo(sol::table tween_table, sol::protected_fu
     std::function<void(T)> setfunc = [tween_table, setter](T x) { setter(tween_table, x); };
     T start = getfunc();
     
-    return TweenManager::GOTo(getfunc, setfunc, start, end, duration);
+    ITween* new_tween = TweenManager::GOTo(getfunc, setfunc, start, end, duration).get();
+    return new_tween;
 }
-
-//void ComponentManager::UpdateTweens()
-//{
-//    std::for_each(active_float_tweens.begin(), active_float_tweens.end(), [](TestTween<float> &active_float_tween) { active_float_tween.UpdateTween(); });
-//    
-//    active_float_tweens.erase(std::remove_if(active_float_tweens.begin(), active_float_tweens.end(), [](TestTween<float> &active_float_tween) { return active_float_tween.loops == 0; }), active_float_tweens.end());
-//    
-//    std::for_each(active_vector2_tweens.begin(), active_vector2_tweens.end(), [](TestTween<b2Vec2> &active_vector2_tween) { active_vector2_tween.UpdateTween(); });
-//    
-//    active_vector2_tweens.erase(std::remove_if(active_vector2_tweens.begin(), active_vector2_tweens.end(), [](TestTween<b2Vec2> &active_vector2_tween) { return active_vector2_tween.loops == 0; }), active_vector2_tweens.end());
-//}

@@ -12,6 +12,7 @@
 #include "sol/sol.hpp"
 #include "EaseManager.hpp"
 
+#include <cstdint>
 #include <functional>
 
 
@@ -47,29 +48,37 @@ public:
     
     bool IsPlaying();
     
-    ITween* cppTweenPlay();
+    ITween* Play();
 
-    ITween* cppTweenPause();
+    ITween* Pause();
 
-    ITween* cppTweenRewind();
-
-    ITween* cppTweenKill();
-
-    ITween* cppTweenOnKill(sol::protected_function kill_func, sol::optional<sol::table> kill_table);
-
-    ITween* cppTweenSetOvershootOrAmplitude(float overshootOrAmplitude);
-
-    ITween* cppTweenSetTimescale(float timescale);
-
-    ITween* cppTweenSetLoops(int loops, LoopType loop_type);
-
-    ITween* cppTweenSetEase(EaseType ease_type);
-
-    ITween* cppTweenSetUpdate(UpdateType update_type);
+    ITween* Rewind();
     
-    ITween* cppTweenSetAxisConstraint(AxisConstraint axis_constraint);
+    ITween* Stop();
 
-    ITween* cppTweenSetSnapping(bool snapping);
+    ITween* Kill();
+
+    ITween* OnKill(sol::protected_function kill_func, sol::optional<sol::table> kill_table);
+
+    ITween* SetOvershootOrAmplitude(float overshootOrAmplitude);
+
+    ITween* SetTimescale(float timescale);
+    
+    float GetTimescale() const;
+
+    ITween* SetLoops(int32_t loops, LoopType loop_type);
+
+    ITween* SetEase(EaseType ease_type);
+
+    ITween* SetUpdate(UpdateType update_type);
+    
+    ITween* SetAxisConstraint(AxisConstraint axis_constraint);
+
+    ITween* SetSnapping(bool snapping);
+    
+    ITween* SetProgress(float progress);
+    
+    float GetProgress() const;
     
 protected:
     
@@ -85,9 +94,9 @@ protected:
     
     float timescale = 1.0f;
     
-    int loops = 1;
+    int32_t loops = 1;
 
-    int loops_completed = 0;
+    int32_t loops_completed = 0;
     
     LoopType loop_type = LoopType::Restart;
 
@@ -101,6 +110,7 @@ protected:
 
     bool playing = true;
 };
+
 
 template <typename T>
 class Tween : public ITween {

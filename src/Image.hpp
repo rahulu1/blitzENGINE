@@ -14,8 +14,14 @@
 struct Image
 {
     SDL_Texture* texture;
-    int width;
-    int height;
+    uint16_t width;
+    uint16_t height;
+    
+    
+    Image(SDL_Texture* img_texture, uint16_t img_width, uint16_t img_height) :
+    texture(img_texture),
+    width(img_width),
+    height(img_height) {}
 };
 
 #endif /* Image_hpp */

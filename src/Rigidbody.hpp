@@ -40,13 +40,13 @@ public:
     void OnStart() override;
     
     
+    void OnFixedUpdate() override;
+    
+    
     void OnUpdate() override;
     
     
     void OnLateUpdate() override;
-    
-    
-    void OnFixedUpdate() override;
     
     
     void OnCollisionEnter(const CollisionData &collision) override;
@@ -267,19 +267,14 @@ private:
     
     
     uint16 _flags = (e_preciseFlag | e_colliderFlag | e_triggerFlag);
-};
+    
+}; /* Rigidbody */
 
 
 inline std::shared_ptr<Component> Rigidbody::Clone() const { return std::make_shared<Rigidbody>(*this); }
 
 
 inline std::shared_ptr<Component> Rigidbody::GetSharedPointer() { return shared_from_this(); }
-
-
-inline void Rigidbody::OnUpdate() {}
-
-
-inline void Rigidbody::OnLateUpdate() {}
 
 
 inline void Rigidbody::OnFixedUpdate()
@@ -292,11 +287,21 @@ inline void Rigidbody::OnFixedUpdate()
 }
 
 
+inline void Rigidbody::OnUpdate() {}
+
+
+inline void Rigidbody::OnLateUpdate() {}
+
+
 inline ITween* Rigidbody::GOMove(b2Vec2 end, float duration)
 {
     std::function<b2Vec2()> getter = [this](){ return this->GetPosition(); };
+    
     std::function<void(b2Vec2 x)> setter = [this](b2Vec2 new_pos){ this->MovePosition(new_pos); };
-    return TweenManager::GOTo(getter, setter, GetPosition(), end, duration);
+    
+    ITween* move_tween = TweenManager::GOTo(getter, setter, GetPosition(), end, duration).get();
+    
+    return move_tween;
 }
 
 
@@ -665,7 +670,7 @@ static inline sol::table cppPhysicsRaycastAll(b2Vec2 position, b2Vec2 direction,
     
     if (Rigidbody::GetWorld())
     {
-        int hits = 0;
+        uint32_t hits = 0;
         
         PhysicsRaycastAllCallback raycast_all_callback;
         

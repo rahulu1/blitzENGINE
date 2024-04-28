@@ -129,42 +129,4 @@ inline void ComponentManager::cppDebugLog(const std::string &message)          {
 inline void ComponentManager::cppDebugLogError(const std::string &message)     { std::cerr << message << '\n'; }
 
 
-
-// inline void ComponentManager::cppTweenDemoFloat(sol::table table, sol::protected_function getter, sol::protected_function setter, float end_val, float duration, int loops, bool is_YoYo, bool snapping, sol::optional<sol::protected_function> onkill)
-// {
-//     TestTween new_tween = TestTween<float>();
-    
-//     new_tween.table = table;
-//     new_tween.getter = getter;
-//     new_tween.setter = setter;
-//     new_tween.onkill = onkill;
-//     new_tween.start_val = getter(table);
-//     new_tween.end_val = end_val;
-//     new_tween.duration = duration;
-//     new_tween.loops = loops;
-//     new_tween.is_YoYo = is_YoYo;
-//     new_tween.snapping = snapping;
-    
-//     active_float_tweens.emplace_back(new_tween);
-// }
-
-
-// inline void ComponentManager::cppTweenDemoVector2(sol::table table, sol::protected_function getter, sol::protected_function setter, const b2Vec2 &end_val, float duration, int loops, bool is_YoYo, bool snapping, sol::optional<sol::protected_function> onkill)
-// {
-//     TestTween new_tween = TestTween<b2Vec2>();
-    
-//     new_tween.table = table;
-//     new_tween.getter = getter;
-//     new_tween.setter = setter;
-//     new_tween.onkill = onkill;
-//     new_tween.start_val = getter(table);
-//     new_tween.end_val = end_val;
-//     new_tween.duration = duration;
-//     new_tween.loops = loops;
-//     new_tween.is_YoYo = is_YoYo;
-//     new_tween.snapping = snapping;
-    
-//     active_vector2_tweens.emplace_back(new_tween);
-// }
-
 #endif /* ComponentManager_hpp */

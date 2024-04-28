@@ -37,7 +37,7 @@ public:
     
     static inline std::unordered_map<std::string, Template> actor_templates;
     
-    static inline std::map<int, std::shared_ptr<Actor>> dont_destroy_on_load;
+    static inline std::map<uint32_t, std::shared_ptr<Actor>> dont_destroy_on_load;
     
     static inline Scene current_scene;
 };

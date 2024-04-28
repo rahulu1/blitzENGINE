@@ -198,7 +198,7 @@ void Scene::DestroyActor(Actor *actor)
 }
 
 
-void Scene::BatchEraseDeadActorsFromMap(std::map<int, std::weak_ptr<Actor>> &flat_map_to_clean)
+void Scene::BatchEraseDeadActorsFromMap(std::map<uint32_t, std::weak_ptr<Actor>> &flat_map_to_clean)
 {
     for (auto actor_it = flat_map_to_clean.begin(); actor_it != flat_map_to_clean.end();)
     {

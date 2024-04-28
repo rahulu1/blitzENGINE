@@ -248,7 +248,7 @@ sol::table Actor::cppActorGetComponents(const std::string &type_name)
 {
     sol::table component_table = ComponentManager::GetLuaState()->create_table();
     
-    int components_found = 0;
+    uint16_t components_found = 0;
     
     for (auto &actor_component_pair : actor_components)
     {

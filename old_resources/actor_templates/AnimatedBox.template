@@ -1,0 +1,19 @@
+{
+	"name": "falling_box",
+	"components": {
+		"1": {
+			"type": "Animator",
+			"animation_name": "test"
+		},
+		"2": {
+			"type": "AnimatedSprite",
+			"sprite": "box2",
+			"sorting_order": -999
+		},
+		"3": {
+			"type": "Rigidbody",
+			"body_type": "kinematic",
+			"has_trigger": false
+		}
+	}
+}

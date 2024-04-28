@@ -11,13 +11,13 @@
 
 
 template <typename T>
-ITween* TweenManager::GOTo(std::function<T ()> getter, std::function<void (T)> setter, T start, T end, float duration)
+std::shared_ptr<Tween<T>> TweenManager::GOTo(std::function<T ()> getter, std::function<void (T)> setter, T start, T end, float duration)
 {
-    std::shared_ptr<ITween> new_tween = Tween<T>::CreateTween(getter, setter, start, end, duration);
+    std::shared_ptr<Tween<T>> new_tween = Tween<T>::CreateTween(getter, setter, start, end, duration);
 
     updating_tweens.insert(new_tween);
     
-    return new_tween.get();
+    return new_tween;
 }
 
 
@@ -81,6 +81,6 @@ void TweenManager::FixedUpdate()
 }
 
 
-template ITween* TweenManager::GOTo<float>(std::function<float()> getter, std::function<void(float)> setter, float start, float end, float duration);
+template std::shared_ptr<Tween<float>> TweenManager::GOTo<float>(std::function<float()> getter, std::function<void(float)> setter, float start, float end, float duration);
 
-template ITween* TweenManager::GOTo<b2Vec2>(std::function<b2Vec2()> getter, std::function<void(b2Vec2)> setter, b2Vec2 start, b2Vec2 end, float duration);
+template std::shared_ptr<Tween<b2Vec2>> TweenManager::GOTo<b2Vec2>(std::function<b2Vec2()> getter, std::function<void(b2Vec2)> setter, b2Vec2 start, b2Vec2 end, float duration);

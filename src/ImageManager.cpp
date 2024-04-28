@@ -14,7 +14,7 @@
 
 namespace fs = std::filesystem;
 
-Image* ImageManager::GetImage(const std::string &image_name)
+std::shared_ptr<Image> ImageManager::GetImage(const std::string &image_name)
 {
     std::string image_path = IMAGES_PATH + image_name + ".png";
     
@@ -26,16 +26,16 @@ Image* ImageManager::GetImage(const std::string &image_name)
         
         else // if file exists, load texture
         {
-            image_cache[image_name] = Image{IMG_LoadTexture(Renderer::GetSDLRenderer(), image_path.c_str()), 0, 0};
-            SDL_QueryTexture(image_cache[image_name].texture, NULL, NULL, &image_cache[image_name].width, &image_cache[image_name].height);
+            SDL_Texture* get_texture = IMG_LoadTexture(Renderer::GetSDLRenderer(), image_path.c_str());
+            AddImage(image_name, get_texture);
         }
     }
     
-    return &image_cache[image_name];
+    return image_cache[image_name];
 }
 
 
-void ImageManager::cppImageDrawEx(const std::string &image_name, float _x, float _y, float _rotation_degrees, float _scale_x, float _scale_y, float _pivot_x, float _pivot_y, float _r, float _g, float _b, float _a, float _sorting_order)
+void ImageManager::cppImageDrawEx(const std::string &image_name, float _x, float _y, double _rotation_degrees, float _scale_x, float _scale_y, float _pivot_x, float _pivot_y, float _r, float _g, float _b, float _a, float _sorting_order)
 {
     ImageDrawRequest image_draw_req;
     
@@ -50,9 +50,9 @@ void ImageManager::cppImageDrawEx(const std::string &image_name, float _x, float
     image_draw_req.x = _x;
     image_draw_req.y = _y;
     
-    image_draw_req.rotation_degrees = static_cast<int>(_rotation_degrees);
+    image_draw_req.rotation_degrees = _rotation_degrees;
     
-    image_draw_req.sorting_order = static_cast<int>(_sorting_order);
+    image_draw_req.sorting_order = static_cast<uint16_t>(_sorting_order);
     
     image_draw_req.r = static_cast<Uint8>(_r);
     image_draw_req.g = static_cast<Uint8>(_g);
@@ -72,7 +72,7 @@ void ImageManager::cppImageDrawUIEx(const std::string &image_name, float _x, flo
     image_draw_req.x = _x;
     image_draw_req.y = _y;
     
-    image_draw_req.sorting_order = static_cast<int>(_sorting_order);
+    image_draw_req.sorting_order = static_cast<uint16_t>(_sorting_order);
     
     image_draw_req.r = static_cast<Uint8>(_r);
     image_draw_req.g = static_cast<Uint8>(_g);

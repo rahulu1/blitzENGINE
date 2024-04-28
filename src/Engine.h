@@ -117,7 +117,7 @@ private:
     static inline float simulation_time_budget = 0.0f;
     
     
-    static inline int steps_taken_this_frame = 0;
+    static inline uint16_t steps_taken_this_frame = 0;
     
     
     bool engine_quit = false;

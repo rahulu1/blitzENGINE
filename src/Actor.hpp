@@ -77,7 +77,7 @@ public:
     std::string cppActorGetName();
     
     
-    int cppActorGetID();
+    uint32_t cppActorGetID();
     
     
     sol::object cppActorGetComponentByKey(const std::string &key);
@@ -145,7 +145,7 @@ public:
     std::string name;
     
     
-    int uuid;
+    uint32_t uuid;
 
     
 private:
@@ -172,10 +172,10 @@ private:
     std::weak_ptr<Actor> self_reference;
     
     
-    static inline int next_uuid = 0;
+    static inline uint32_t next_uuid = 0;
     
     
-    static inline int runtime_components_added;
+    static inline uint32_t runtime_components_added;
     
     
     static inline const float removal_threshold = 0.3f;
@@ -191,7 +191,7 @@ inline std::shared_ptr<Actor> Actor::GetSharedPointer() { return shared_from_thi
 inline std::string Actor::cppActorGetName()             { return name; }
 
 
-inline int Actor::cppActorGetID()                       { return uuid; }
+inline uint32_t Actor::cppActorGetID()                       { return uuid; }
 
 
 inline sol::object Actor::cppActorAddComponent(const std::string &type_name)

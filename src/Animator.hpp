@@ -48,6 +48,9 @@ public:
     Animator* SetAnimation(const std::string &animation_name);
     
     
+    Animator* cppAnimatorSetLoops(int32_t loops, LoopType loop_type);
+    
+    
     std::string cppAnimatorGetAnimation() const;
     
     
@@ -157,6 +160,13 @@ inline void Animator::cppAnimatorIsPlaying() const
 inline std::string Animator::cppAnimatorGetAnimation() const
 {
     return current_animation_name;
+}
+
+
+inline Animator* Animator::cppAnimatorSetLoops(int32_t loops, LoopType loop_type)
+{
+    frame_tween->SetLoops(loops, loop_type);
+    return this;
 }
 
 

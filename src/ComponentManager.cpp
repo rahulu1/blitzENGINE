@@ -61,6 +61,7 @@ void ComponentManager::Init()
     "GetCurrentFrameName", sol::c_call<decltype(&Animator::GetCurrentFrameName), &Animator::GetCurrentFrameName>,
     "SetAnimation", sol::c_call<decltype(&Animator::SetAnimation), &Animator::SetAnimation>,
     "GetAnimation", sol::c_call<decltype(&Animator::cppAnimatorGetAnimation), &Animator::cppAnimatorGetAnimation>,
+    "SetLoops", sol::c_call<decltype(&Animator::cppAnimatorSetLoops), &Animator::cppAnimatorSetLoops>,
     "SetTimescale", sol::c_call<decltype(&Animator::cppAnimatorSetTimescale), &Animator::cppAnimatorSetTimescale>,
     "GetTimescale", sol::c_call<decltype(&Animator::cppAnimatorGetTimescale), &Animator::cppAnimatorGetTimescale>,
     "OnKill", sol::c_call<decltype(&Animator::cppAnimatorOnKill), &Animator::cppAnimatorOnKill>);
